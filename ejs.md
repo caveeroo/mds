@@ -3,12 +3,11 @@
 ```python
 import re
 text = input()
+expresion = r''
 
-expresion = '\\w+'
-
-results = re.findall(expresion, text)
-for match in results:
-    print(match)
+results = re.search(expresion, text)
+if results:
+    print(results.group(0))
 ```
 
 # Ejercicio 1
@@ -46,3 +45,10 @@ Expresión:
 ```
 
 Una e opcional con la interrogación, separador opcional (si el separador es nada, se comple con el 0), cuatro dígitos obligatorio (\d), separador opcional y tres mayúsculas con el rango A-Z
+
+
+Dado un formato de fechas yyyy-mm-dd, se pide convertir a dd.mm.yyyy.
+Para cada match encontrado en los documentos propuestos se tendr  ́a que imprimir en el siguiente
+formato (los rangos de fecha puede ser erroneos, pueden existir un mes 20).
+• Para el caso “El profesor Isaac Lozano puso una fecha de entrega el 2023-04-16 a las 23:55”.
+Se imprimir ́a “El profesor Isaac Lozano puso una fecha de entrega el 16.04.2023 a las 23:55”
