@@ -52,3 +52,21 @@ Para cada match encontrado en los documentos propuestos se tendr  ́a que imprim
 formato (los rangos de fecha puede ser erroneos, pueden existir un mes 20).
 • Para el caso “El profesor Isaac Lozano puso una fecha de entrega el 2023-04-16 a las 23:55”.
 Se imprimir ́a “El profesor Isaac Lozano puso una fecha de entrega el 16.04.2023 a las 23:55”
+
+Expresion: (\d{4})-(\d{2})-(\d{2})
+
+Usamos grupos para poder hacer el replacement fácil luego.
+
+Script: 
+```python
+import re
+text = input()
+
+expresion = r'(\d{4})-(\d{2})-(\d{2})'
+
+results = re.search(expresion, text)
+if results:
+    lista = results.groups(0)
+    replacement = lista[2] + "-" + lista[1] + "-" + lista[0]
+    print(re.sub(expresion,replacement, text))
+```
