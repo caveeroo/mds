@@ -1,3 +1,16 @@
+# Plantilla
+
+```python
+import re
+text = input()
+
+expresion = “\\w+”
+
+results = re.findall(expresion, text)
+for match in results:
+    print(match)
+```
+
 # Ejercicio 1
 
 Enunciado:
@@ -12,3 +25,4 @@ Expresión:
 ```
 \d{4}
 ```
+
