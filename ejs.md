@@ -4,7 +4,7 @@
 import re
 text = input()
 
-expresion = “\\w+”
+expresion = '\\w+'
 
 results = re.findall(expresion, text)
 for match in results:
