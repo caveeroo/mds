@@ -12,20 +12,22 @@ for match in results:
 
 # Ejercicio 1
 
-Enunciado:
+## Enunciado
 
 Dato un texto de una sola línea, determinar todos los años (números formados estrictamente por 4
 dígitos) que aparecen. Un año es una cadena numérica de longitud 4, con cualquier valor en el rango
 [0000, 9999]. Se tendrán que imprimir por pantalla en el lenguaje deseado usando una expresión
 regular todos los años que vienen en el texto en orden de aparición, en una línea cada uno
 
-Expresión:
+## Expresión
 
 ```regex
 (?<!-)\b[0-9]{4}\b
 ```
 
 # Ejercicio 2
+
+## Enunciado
 
 Dato un texto de una línea, determinar todas las matrículas que aparecen. Una matrícula es una
 cadena que tiene las siguientes características:
@@ -38,7 +40,7 @@ separador.
 Se tendrán que imprimir por pantalla usando el lenguaje elegido usando una expresión regular todas
 las matrículas que vienen en el texto en orden de aparición
 
-Expresión:
+## Expresión
 
 ```regex
 ^(E[- ]{0,1})?\d{4}[- ]{0,1}[A-Z]{3}$
@@ -48,20 +50,22 @@ Una e opcional con la interrogación, separador opcional (si el separador es nad
 
 # Ejercicio 3
 
+## Enunciado
+
 Dado un formato de fechas yyyy-mm-dd, se pide convertir a dd.mm.yyyy.
 Para cada match encontrado en los documentos propuestos se tendrá que imprimir en el siguiente
 formato (los rangos de fecha puede ser erroneos, pueden existir un mes 20).
 • Para el caso “El profesor Isaac Lozano puso una fecha de entrega el 2023-04-16 a las 23:55”.
 Se imprimir ́a “El profesor Isaac Lozano puso una fecha de entrega el 16.04.2023 a las 23:55”
 
-Expresion:
+## Expresión
 
 ```regex
 (\d{4})-(\d{2})-(\d{2})
 ```
 Usamos grupos para poder hacer el replacement fácil luego.
 
-Script:
+## Script
 
 ```python
 import re
@@ -78,7 +82,7 @@ if results:
 
 # Ejercicio 4
 
-Enunciado:
+## Enunciado
 
 Dado un texto, determinar cuando se ha encontrado un email de alumno de nuestra universidad
 “@alumnos.urjc.es” o profesor “@urjc.es”. Los emails de alumnos están formados del siguiente
@@ -98,13 +102,13 @@ ulado en 2015”
 • Para un profesor reportaremos para el ejemplo isaac.lozano@urjc.es “profesor isaac apellido
 lozano”
 
-Expresion:
+## Expresión
 
 ```regex
 r'\b([a-zA-Z]\.([a-zA-Z]{2,})\.(\d{4})@alumnos\.urjc\.es)|(([a-zA-Z]+)\.([a-z-A-Z]+)@urjc\.es)\b'
 ```
 
-Script:
+## Script
 
 ```python
 import re
@@ -129,7 +133,7 @@ for match in results:
 
 # Ejercicio 5
 
-Enunciado:
+## Enunciado
 
 Dado un texto devolver las direcciones postales.
 Una dirección estará compuesta de una calle representada por “C/” o ”Calle’ seguido de un espacio con el nombre de la calle (una sola palabra) donde la primera letra debe estar en mayúscula, opcionalmente una coma, un número arbitrario de espacios, el número en cualquiera de los siguientes formatos (Nº7, N 7, 7, Nº 7, n7).
@@ -147,3 +151,45 @@ Para cada calle encontrada se reportará:
 
 Nota: Si te da error busca las calles más bonitas de Madrid y revisa sintácticamente como se escriben.
 
+## Expresión
+
+```regex
+\b(?:(?:C\/)|(?:Calle)) ([A-Z][a-zA-Z]+)[,\s]*(?:(?:[nN]º?\s?)?)(\d+),\s*(\d{5})\b
+```
+
+## Script
+
+```python
+import re
+
+text = input()
+expresion = r'\b(?:(?:C\/)|(?:Calle)) ([A-Z][a-zA-Z]+)[,\s]*(?:(?:[nN]º?\s?)?)(\d+),\s*(\d{5})\b'
+
+result = re.findall(expresion, text)
+for r in result:
+    print(r[2] + '-' + r[0] + '-' + r[1])
+```
+
+Da no output en el juez, pero creo que es correcta la expresión.
+
+## Explicación regex
+
+\b: limite de palabra para ir buscando la primera parte de la dirección, ya que buscamos una calle.
+
+`(?:(?:C\/)|(?:Calle))` busca "C/" o "Calle". Usamos ?: para que no se cree un grupo al hacer match.
+
+` ([A-Z][a-zA-Z]+)` busca un espacio y una palabra que comienza con una letra mayúscula, seguida de una o más letras, hace match de la calle, y lo interpreta como un grupo para usarlo más adelante.
+
+`[,\s]*` busca comas y espacios, sin importar orden o número encontrados, incluyendo cero.
+
+`(?:(?:[nN]º?\s?)?)` busca un número de calle opcional que puede estar precedido por la letra "N" en mayúsculas o minúsculas seguido (o no) del símbolo "º". También puede haber espacios opcionales después de la letra "N" si no hay un "º".
+
+`(\d+)` captura que busca el número de calle, desde un dígito a cualquier número de dígitos.
+
+`,` busca una coma después del número de la calle.
+
+`\s*` busca cualquier cantidad de espacios opcionales después de la coma.
+
+`(\d{5})` es el último grupo de captura que busca un código postal de 5 dígitos.
+
+`\b` es otro límite de palabra
