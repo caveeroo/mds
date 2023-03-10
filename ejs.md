@@ -49,7 +49,7 @@ Una e opcional con la interrogación, separador opcional (si el separador es nad
 # Ejercicio 3
 
 Dado un formato de fechas yyyy-mm-dd, se pide convertir a dd.mm.yyyy.
-Para cada match encontrado en los documentos propuestos se tendr  ́a que imprimir en el siguiente
+Para cada match encontrado en los documentos propuestos se tendrá que imprimir en el siguiente
 formato (los rangos de fecha puede ser erroneos, pueden existir un mes 20).
 • Para el caso “El profesor Isaac Lozano puso una fecha de entrega el 2023-04-16 a las 23:55”.
 Se imprimir ́a “El profesor Isaac Lozano puso una fecha de entrega el 16.04.2023 a las 23:55”
@@ -126,3 +126,24 @@ results = re.findall(expresion, text)
 for match in results:
     myprint(list(match))
 ```
+
+# Ejercicio 5
+
+Enunciado:
+
+Dado un texto devolver las direcciones postales.
+Una dirección estará compuesta de una calle representada por “C/” o ”Calle’ seguido de un espacio con el nombre de la calle (una sola palabra) donde la primera letra debe estar en mayúscula, opcionalmente una coma, un número arbitrario de espacios, el número en cualquiera de los siguientes formatos (Nº7, N 7, 7, Nº 7, n7).
+No es valido N º7 ni º7, la N podría estar en mayúsculas o minúsculas. Seguido, una coma, un número arbitrario de espacios y un número de 5 dígitos correspondiente a un código postal. 
+Los nombres de las calles deben poder validar calles de Madrid formadas por una sola palabra, no es necesario que reconozca ”Calle Almendro Azul”, porque el nombre de la calle tiene dos palabras en vez de una.
+
+Ejemplos de casos:
+
+• “C/ Dulcinea Nº 10, 28936”
+• “Calle Dulcinea 10, 28106”
+• “Calle Dulcinea N10, 28091”
+
+Para cada calle encontrada se reportará: 
+“CP-Calle-Numero”, por ejemplo: “28926-Dulcinea-10”.
+
+Nota: Si te da error busca las calles más bonitas de Madrid y revisa sintácticamente como se escriben.
+
