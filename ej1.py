@@ -1,7 +1,7 @@
 import re
 text = input()
 
-expresion = r'^\d{4}$'
+expresion = r"(?<!-)\b[0-9]{4}\b"
 
 results = re.search(expresion, text)
 if results:
