@@ -1,7 +1,7 @@
 import re
 text = input()
-expresion = r'^(?:E[- ]{0,1})?\d{4}[- ]{0,1}[A-Z]{3}$'
+expresion = r'\b(?:E[- ]{0,1})?\d{4}[- ]{0,1}[A-Z]{3}\b'
 
-results = re.search(expresion, text)
-if results:
-    print(results.group(0))
+results = re.findall(expresion, text)
+for match in results:
+    print(match)

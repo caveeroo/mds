@@ -1,10 +1,10 @@
 import re
+
 text = input()
+expresion = r'\b(\d{4})-(\d{2})-(\d{2})\b'
 
-expresion = r'(\d{4})-(\d{2})-(\d{2})'
+def replace(match):
+    return match.group(3) + '-' + match.group(2) + '-' + match.group(1)
 
-results = re.search(expresion, text)
-if results:
-    lista = results.groups(0)
-    replacement = lista[2] + "-" + lista[1] + "-" + lista[0]
-    print(re.sub(expresion,replacement, text))
+result = re.sub(expresion, replace, text)
+print(result)
