@@ -22,7 +22,7 @@ regular todos los años que vienen en el texto en orden de aparición, en una l�
 Expresión:
 
 ```
-^\d{4}$
+(?<!-)\b[0-9]{4}\b
 ```
 
 # Ejercicio 2
